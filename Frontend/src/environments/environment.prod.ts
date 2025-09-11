@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://citizen-sphere-backend.herokuapp.com/api'
+  apiUrl: process.env['API_URL'] || 'https://citizen-sphere-backend.herokuapp.com/api'
 };

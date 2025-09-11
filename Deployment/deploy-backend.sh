@@ -8,7 +8,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-APP_NAME="citizen-sphere-backend"
+    APP_NAME="citizen-sphere-backend"
 TEAM_NAME="runtimeterror"
 
 echo -e "${GREEN}🚀 Citizen Sphere Backend Deployment to Heroku${NC}"
@@ -43,6 +43,9 @@ heroku config:set ASPNETCORE_ENVIRONMENT=Production --app $APP_NAME
 heroku config:set JWT_KEY="YourSuperSecretKeyThatIsAtLeast32CharactersLong123456" --app $APP_NAME
 heroku config:set JWT_ISSUER="CitizenConcernAPI" --app $APP_NAME
 heroku config:set JWT_AUDIENCE="CitizenConcernAPI" --app $APP_NAME
+heroku config:set ALLOW_ORIGIN="*" --app $APP_NAME
+heroku config:set CORS_ALLOWED_ORIGINS="*" --app $APP_NAME
+heroku config:set OpenAI-ApiKey="" --app $APP_NAME
 
 # Set stack to container for Docker deployment
 echo -e "${YELLOW}🐳 Setting stack to container...${NC}"

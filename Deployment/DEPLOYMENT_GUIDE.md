@@ -36,7 +36,7 @@ Your Citizen Sphere platform will be deployed as:
 
 ```bash
 # Make scripts executable
-chmod +x deploy-all.sh deploy-backend.sh deploy-frontend.sh
+chmod +x deploy-all.sh deploy-backend.sh deploy-frontend.sh post-deploy.sh
 
 # Run complete deployment
 ./deploy-all.sh
@@ -104,7 +104,6 @@ heroku create citizen-sphere-frontend --region eu --team runtimeterror
 
 # Set environment variables
 heroku config:set NODE_ENV=production --app citizen-sphere-frontend
-heroku config:set API_BASE_URL=https://citizen-sphere-backend.herokuapp.com --app citizen-sphere-frontend
 
 # Set stack to container
 heroku stack:set container --app citizen-sphere-frontend

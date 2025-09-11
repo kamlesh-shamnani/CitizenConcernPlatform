@@ -1,0 +1,9 @@
+{
+  "apiUrl": "https://citizen-sphere-backend.herokuapp.com/api",
+  "environment": "production",
+  "features": {
+    "enableRewards": true,
+    "enableSDGTracking": true,
+    "enableVoiceInput": false
+  }
+}

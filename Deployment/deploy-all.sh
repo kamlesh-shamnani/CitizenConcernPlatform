@@ -76,6 +76,9 @@ else
     exit 1
 fi
 
+#post deployment steps
+./post-deploy.sh
+
 echo ""
 echo -e "${GREEN}🎉 DEPLOYMENT COMPLETED SUCCESSFULLY! 🎉${NC}"
 echo "=========================================="

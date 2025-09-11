@@ -37,7 +37,7 @@ heroku create $APP_NAME --region eu --team $TEAM_NAME 2>/dev/null || echo "App m
 # Set environment variables
 echo -e "${YELLOW}⚙️  Setting environment variables...${NC}"
 heroku config:set NODE_ENV=production --app $APP_NAME
-heroku config:set API_BASE_URL=$BACKEND_URL --app $APP_NAME
+heroku config:set API_URL="$BACKEND_URL/api" --app $APP_NAME
 
 # Set stack to container for Docker deployment
 echo -e "${YELLOW}🐳 Setting stack to container...${NC}"
@@ -46,13 +46,27 @@ heroku stack:set container --app $APP_NAME
 # Navigate to project root
 cd ..
 
-# Update environment files with backend URL
+# Update environment files to use configurable API URL
 echo -e "${YELLOW}🔧 Updating environment configuration...${NC}"
 cat > Frontend/src/environments/environment.prod.ts << EOL
 export const environment = {
   production: true,
-  apiUrl: '$BACKEND_URL/api'
+  apiUrl: process.env['API_URL'] || '$BACKEND_URL/api'
 };
+EOL
+
+# Update runtime config file
+echo -e "${YELLOW}🔧 Updating runtime configuration...${NC}"
+cat > Frontend/src/assets/config/app-config.json << EOL
+{
+  "apiUrl": "$BACKEND_URL/api",
+  "environment": "production",
+  "features": {
+    "enableRewards": true,
+    "enableSDGTracking": true,
+    "enableVoiceInput": false
+  }
+}
 EOL
 
 # Deploy to Heroku using subtree (Frontend subdirectory only)
