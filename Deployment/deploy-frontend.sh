@@ -51,22 +51,8 @@ echo -e "${YELLOW}🔧 Updating environment configuration...${NC}"
 cat > Frontend/src/environments/environment.prod.ts << EOL
 export const environment = {
   production: true,
-  apiUrl: process.env['API_URL'] || '$BACKEND_URL/api'
+  apiUrl: 'https://citizen-sphere-backend-c1f6ff51324d.herokuapp.com/api'
 };
-EOL
-
-# Update runtime config file
-echo -e "${YELLOW}🔧 Updating runtime configuration...${NC}"
-cat > Frontend/src/assets/config/app-config.json << EOL
-{
-  "apiUrl": "$BACKEND_URL/api",
-  "environment": "production",
-  "features": {
-    "enableRewards": true,
-    "enableSDGTracking": true,
-    "enableVoiceInput": false
-  }
-}
 EOL
 
 # Deploy to Heroku using subtree (Frontend subdirectory only)
