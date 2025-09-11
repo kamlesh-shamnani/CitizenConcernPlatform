@@ -10,7 +10,7 @@ NC='\033[0m' # No Color
 
 APP_NAME="citizen-sphere-frontend"
 TEAM_NAME="runtimeterror"
-BACKEND_URL="https://citizen-sphere-backend.herokuapp.com"
+BACKEND_URL="https://citizen-sphere-backend.herokuapp.com" #This is not working, replace original hosted API URL with new value in environment.prod.ts
 
 echo -e "${GREEN}🚀 Citizen Sphere Frontend Deployment to Heroku${NC}"
 echo "==============================================="
@@ -37,7 +37,6 @@ heroku create $APP_NAME --region eu --team $TEAM_NAME 2>/dev/null || echo "App m
 # Set environment variables
 echo -e "${YELLOW}⚙️  Setting environment variables...${NC}"
 heroku config:set NODE_ENV=production --app $APP_NAME
-heroku config:set API_URL="$BACKEND_URL/api" --app $APP_NAME
 
 # Set stack to container for Docker deployment
 echo -e "${YELLOW}🐳 Setting stack to container...${NC}"
@@ -51,7 +50,7 @@ echo -e "${YELLOW}🔧 Updating environment configuration...${NC}"
 cat > Frontend/src/environments/environment.prod.ts << EOL
 export const environment = {
   production: true,
-  apiUrl: 'https://citizen-sphere-backend-c1f6ff51324d.herokuapp.com/api'
+  apiUrl: '$BACKEND_URL/api'
 };
 EOL
 
